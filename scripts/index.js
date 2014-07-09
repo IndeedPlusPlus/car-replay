@@ -4,6 +4,10 @@
 var replay = false;
 function redrawAll() {
     replay.redraw();
+    var current = document.getElementById('replay-current-step');
+    current.innerHTML = replay.currentStep;
+    var total = document.getElementById('replay-total-steps');
+    total.innerHTML = replay.steps.length;
 }
 
 var testData = {
