@@ -1,0 +1,18 @@
+#replay-index #replay-canvas {
+    height: 600px;
+    width: 600px;
+    display: block;
+    margin: auto;
+}
+
+#replay-index #replay-container {
+    border: 1px dashed grey;
+    border-radius: 5px;
+    margin: 20px auto;
+    width: 620px;
+    height: 600px;
+}
+
+#replay-index #replay-control {
+    margin: 50px auto;
+}
