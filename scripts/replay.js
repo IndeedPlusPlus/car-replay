@@ -83,15 +83,15 @@ function Replay(steps, canvas, board) {
     this.canvas = canvas;
     this.board = board;
     this.currentStep = 0;
+    this.exitX = 3;
+    this.exitY = 5;
     this.drawGird = function () {
         var context = this.canvas.getContext('2d');
 
         /* draw exit */
         context.beginPath();
-        const EXIT_X = 3;
-        const EXIT_Y = 5;
-        context.rect(100 * EXIT_X, 100 * EXIT_Y, 100, 100);
-        context.fillStyle = '#FFF8DD';
+        context.rect(100 * this.exitX, 100 * this.exitY, 100, 100);
+        context.fillStyle = '#4F78FD';
         context.fill();
 
         context.beginPath();
