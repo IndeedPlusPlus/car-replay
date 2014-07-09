@@ -1,7 +1,7 @@
 /**
  * Created by indeed on 14-7-9.
  */
-var replay;
+var replay = false;
 function redrawAll() {
     replay.redraw();
 }
@@ -38,48 +38,46 @@ function nextStep() {
         replayOver();
 }
 
-function initialize(cars, steps) {
-    replay = QingBiaoParser(
-        [   '2,2,4,0' ,
-            '3,1,6,1' ,
-            '2,2,6,1' ,
-            '3,4,6,1' ,
-            '2,5,6,1' ,
-            '2,6,6,1' ,
-            '2,3,3,1' ,
-            '3,4,3,0' ,
-            '3,3,1,0' ,
-            '2,6,2,1'
-        ], '6,4',
-        [
-            '2 1 3',
-            '1 1 1',
-            '7 0 3',
-            '1 0 1',
-            '2 0 3',
-            '8 1 3',
-            '9 1 2',
-            '4 1 3',
-            '1 0 3'
-        ]
-    );
-
+function initialize(newReplay) {
+    replay = newReplay;
     setInterval(redrawAll, ANIMATION_INTERVAL / 50);
 }
 
-
-document.addEventListener("DOMContentLoaded", function () {
-    initialize(testData.cars, testData.steps);
-}, true);
-
 var handle = null;
 function playClick() {
+    if (!replay) return false;
     nextStep();
+    return true;
 }
 function pauseClick() {
+    if (!replay) return false;
     if (handle)
         clearTimeout(handle);
+    return true;
 }
 function nextClick() {
+    if (!replay) return false;
     replay.nextStep();
+    return true;
+}
+
+function loadReplay() {
+    var fileInput = document.getElementById('replay-input').files[0];
+    if (fileInput == null)
+        return false;
+    var fileOutput = document.getElementById('replay-output').files[0];
+    if (fileOutput == null)
+        return false;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        var reader = new FileReader();
+        var inputResult = this.result;
+        reader.onload = function (e) {
+            var outputResult = this.result;
+            initialize(parseSunHuiOutputFormat(inputResult.split('\n'), outputResult.split('\n')));
+        };
+        reader.readAsText(fileOutput);
+    };
+    reader.readAsText(fileInput);
+    return true;
 }

@@ -15,6 +15,11 @@
         <button class="replay-control-button" onclick="return pauseClick() && false">Pause</button>
         <button class="replay-control-button" onclick="return nextClick() && false">Next Step</button>
     </div>
+    <div id="replay-loader" >
+        <p><label for="replay-input">Input File</label> <input type="file" id="replay-input" /></p>
+        <p><label for="replay-output">Output File</label> <input type="file" id="replay-output" /></p>
+        <button class="replay-control-button" onclick="return loadReplay() && false">Load</button>
+    </div>
 </div>
 
 </body>

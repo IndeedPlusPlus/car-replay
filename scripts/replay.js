@@ -2,8 +2,8 @@
  * Created by indeed on 14-7-9.
  */
 
-const STEP_INTERVAL = 1000;
-const ANIMATION_INTERVAL = 500;
+const STEP_INTERVAL = 500;
+const ANIMATION_INTERVAL = 100;
 
 function Step(id, type) {
     this.id = id;
@@ -68,7 +68,14 @@ function Car(id, width, height, row, column, color) {
         context.beginPath();
         context.pathRoundedRect(this.currentX, this.currentY, 100 * this.width - 20, 100 * this.height - 20, 10);
         context.fillStyle = this.color;
+        if (this.id == 1) {
+            context.lineWidth = 5;
+            context.strokeStyle = 'gold';
+        }
+        context.stroke();
         context.fill();
+        context.lineWidth = 1;
+        context.strokeStyle = 'black';
     }
 }
 
@@ -107,10 +114,11 @@ function Replay(steps, canvas, board) {
 
     this.drawCars = function () {
         var cars = this.board.cars;
-        for (var i = 0; i < cars.length; ++i) {
-            cars[i].animate();
-            cars[i].draw(this.canvas);
-        }
+        for (var i = 0; i < cars.length; ++i)
+            if (cars[i]) {
+                cars[i].animate();
+                cars[i].draw(this.canvas);
+            }
     };
 
     this.redraw = function () {
